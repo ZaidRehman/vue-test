@@ -3,7 +3,7 @@
     <h1>Counter</h1>
     <div class="counter-main">
       <button id="increment" @click="increment">+</button>
-      <span>{{ count }}</span>
+      <span class="value">{{ count }}</span>
       <button id="decrement" @click="decrement">-</button>
     </div>
   </div>
@@ -21,7 +21,7 @@ button {
   margin: 20px;
   cursor: pointer;
 }
-span {
+.value {
   font-size: 30px;
   font-weight: bold;
 }

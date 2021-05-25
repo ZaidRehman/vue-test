@@ -2,9 +2,10 @@
   <div class="imdb">
     <div class="imdb-head">
       <input v-model="search" type="text" />
-      <button @click="searchMovies">Search</button>
+      <button class="search" @click="searchMovies">Search</button>
     </div>
-    <div class="imdb-main">
+    <div class="imdb-error" v-if="isError">Something went wrong</div>
+    <div class="imdb-main" v-else>
       <div class="movie" v-for="movie in movies" :key="movie.imdbID">
         <img :src="movie.Poster" />
         <span>{{ movie.Title }}</span>
@@ -55,7 +56,7 @@ img {
 </style>
 
 <script>
-import { getMovies } from "../services/imdb-service";
+import service from "../services/imdb-service";
 
 export default {
   name: "imdb",
@@ -63,13 +64,21 @@ export default {
     return {
       movies: [],
       search: "",
+      isError: false,
     };
   },
   methods: {
     searchMovies() {
-      getMovies(this.search).then((data) => {
-        this.movies = data.Search;
-      });
+      return service
+        .getMovies(this.search)
+        .then((data) => {
+          this.movies = data.Search;
+          this.isError = false;
+        })
+        .catch(() => {
+          this.movies = [];
+          this.isError = true;
+        });
     },
   },
 };
