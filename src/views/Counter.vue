@@ -2,9 +2,9 @@
   <div class="counter">
     <h1>Counter</h1>
     <div class="counter-main">
-      <button id="increment" @click="increment">+</button>
+      <button v-if="count < 5" id="increment" @click="increment">+</button>
       <span class="value">{{ count }}</span>
-      <button id="decrement" @click="decrement">-</button>
+      <button v-if="count > 0" id="decrement" @click="decrement">-</button>
     </div>
   </div>
 </template>
@@ -33,6 +33,7 @@ export default {
   data() {
     return {
       count: 0,
+      limit: 5,
     };
   },
   methods: {
@@ -40,7 +41,7 @@ export default {
       this.count++;
     },
     decrement() {
-      this.count && this.count--;
+      this.count--;
     },
   },
 };

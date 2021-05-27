@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <img id="image-id" class="vue-image" alt="Vue logo" src="../assets/logo.png">
     <HomeComponent msg="Welcome to Tesing Workshop of Vue.js App"/>
   </div>
 </template>
